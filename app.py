@@ -16,7 +16,7 @@ class Post(db.Model):
     postdate = db.Column(db.Integer)
     startdate = db.Column(db.Integer)
     enddate = db.Column(db.Integer)
-    description = db.Column(db.String(120))
+    description = db.Column(db.Text)
 
     def __repr__ (self):
         return f"{self.title} - {self.description}"
@@ -31,7 +31,18 @@ def get_posts():
     
     output = []
     for post in posts:
-        post_data = {'title': post.title, 'description': post.description}
+        post_data = {
+            'id' : post.id,
+            'title': post.title,
+            'image' : post.image,
+            'zip' : post.zip,
+            'city' : post.city,
+            'category' : post.category,
+            'postdate' : post.postdate,
+            'startdate' : post.startdate,
+            'enddate' : post.enddate,
+            'description': post.description
+            }
         output.append(post_data)
     return {"posts" : output}
 
